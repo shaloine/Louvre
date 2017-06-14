@@ -1,0 +1,3 @@
+pw_louvre_homepage:
+    path:     /
+    defaults: { _controller: PWLouvreBundle:Default:index }
