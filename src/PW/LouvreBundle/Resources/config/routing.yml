@@ -1,3 +1,9 @@
-pw_louvre_homepage:
-    path:     /
-    defaults: { _controller: PWLouvreBundle:Default:index }
+pw_louvre_home:
+    path:      /
+    defaults:
+        _controller: PWLouvreBundle:Core:index
+
+pw_louvre_reservation:
+    path:      /reservation
+    defaults:
+        _controller: PWLouvreBundle:Core:reservation
