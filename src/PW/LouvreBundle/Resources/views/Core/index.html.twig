@@ -10,7 +10,20 @@
   <h3>Bienvenue sur le site de réservation en ligne du Louvre</h3>
 </div>  
 
-<p>Selectionner la date</p>
-<p>Nombre de tickets</p>
+<div class="well">
+  {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
+  {{ form_errors(form) }}
+
+  {{ form_row(form.date) }}
+  {{ form_row(form.nombre) }}
+  {{ form_row(form.demi) }}
+  {{ form_row(form.mail) }}
+
+  {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+
+  {{ form_rest(form) }}
+
+  {{ form_end(form) }}
+</div>
 {% endblock %}
