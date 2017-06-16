@@ -52,6 +52,7 @@ class Reservation
     public function __construct()
     {
       $this->date = new \Datetime();
+      $this->demi = true;
     }
     /**
      * Get id

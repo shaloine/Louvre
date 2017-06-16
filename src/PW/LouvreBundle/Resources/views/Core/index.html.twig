@@ -3,7 +3,10 @@
 {% block title %}
   Accueil - {{ parent() }}
 {% endblock %}
-
+{% block stylesheets %}
+  {{ parent() }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker3.css"></script>
+  {% endblock %}
 {% block body %}
 
  <div class="jumbotron">
@@ -16,8 +19,8 @@
   {{ form_errors(form) }}
 
   {{ form_row(form.date) }}
-  {{ form_row(form.nombre) }}
   {{ form_row(form.demi) }}
+  {{ form_row(form.nombre) }}
   {{ form_row(form.mail) }}
 
   {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
@@ -26,4 +29,31 @@
 
   {{ form_end(form) }}
 </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+
+  <script>
+    $.fn.datepicker.dates['fr'] = {
+      days: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
+      daysShort: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
+      daysMin: ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"],
+      months: ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre"],
+      monthsShort: ["Jan", "Fev", "Mar", "Avr", "Mai", "Juin", "Juil", "Aoû", "Sep", "Oct", "Nov", "Dec"],
+      today: "Aujourd'hui",
+      clear: "Clear",
+      format: "dd/mm/yyyy",
+      titleFormat: "MM yyyy", /* Leverages same syntax as 'format' */
+      weekStart: 0
+    };
+    jQuery(document).ready(function() {
+      $('.js-datepicker').datepicker({
+        format: 'dd/mm/yyyy',
+        startDate: 'd',
+        language: 'fr',
+      });
+    });
+  </script>
 {% endblock %}
