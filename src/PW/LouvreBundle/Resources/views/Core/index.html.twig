@@ -43,7 +43,7 @@
       months: ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre"],
       monthsShort: ["Jan", "Fev", "Mar", "Avr", "Mai", "Juin", "Juil", "Aoû", "Sep", "Oct", "Nov", "Dec"],
       today: "Aujourd'hui",
-      clear: "Clear",
+      clear: "Effacer",
       format: "dd/mm/yyyy",
       titleFormat: "MM yyyy", /* Leverages same syntax as 'format' */
       weekStart: 0
@@ -53,6 +53,8 @@
         format: 'dd/mm/yyyy',
         startDate: 'd',
         language: 'fr',
+        daysOfWeekDisabled: [0, 2],
+        datesDisabled: ['01/01/yyyy', '02/04/2018','22/04/2018','01/05/yyyy','08/05/yyyy','10/05/2018','30/05/2019','21/05/2018','10/06/2019','14/07/yyyy','15/08/yyyy','01/11/yyyy','11/11/yyyy','25/12/yyyy']
       });
     });
   </script>
