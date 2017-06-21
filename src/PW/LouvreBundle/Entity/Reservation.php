@@ -3,6 +3,7 @@
 namespace PW\LouvreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Reservation
@@ -49,10 +50,16 @@ class Reservation
      */
     private $demi;
 
+    /**
+     * @ORM\OneToMany(targetEntity="PW\LouvreBundle\Entity\Visitor", mappedBy="reservation")
+     */
+    protected $visitors;
+
     public function __construct()
     {
       $this->date = new \Datetime();
       $this->demi = true;
+      $this->visitors = new ArrayCollection();
     }
     /**
      * Get id
@@ -158,5 +165,41 @@ class Reservation
     public function getNombre()
     {
         return $this->nombre;
+    }
+
+    /**
+     * Add visitor
+     *
+     * @param \PW\LouvreBundle\Entity\Visitor $visitor
+     *
+     * @return Reservation
+     */
+    public function addVisitor(\PW\LouvreBundle\Entity\Visitor $visitor)
+    {
+        $this->visitors[] = $visitor;
+
+        $visitor->setReservation($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove visitor
+     *
+     * @param \PW\LouvreBundle\Entity\Visitor $visitor
+     */
+    public function removeVisitor(\PW\LouvreBundle\Entity\Visitor $visitor)
+    {
+        $this->visitors->removeElement($visitor);
+    }
+
+    /**
+     * Get visitors
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVisitors()
+    {
+        return $this->visitors;
     }
 }

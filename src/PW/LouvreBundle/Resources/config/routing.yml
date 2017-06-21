@@ -4,6 +4,6 @@ pw_louvre_home:
         _controller: PWLouvreBundle:Core:index
 
 pw_louvre_reservation:
-    path:      /reservation/{id}
+    path:      /reservation
     defaults:
         _controller: PWLouvreBundle:Core:reservation

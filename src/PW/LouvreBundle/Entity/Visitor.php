@@ -50,10 +50,10 @@ class Visitor
     private $dateNaissance;
 
      /**
-   * @ORM\ManyToOne(targetEntity="PW\LouvreBundle\Entity\Reservation")
-   * @ORM\JoinColumn(nullable=false)
-   */
-  private $reservation;
+      * @ORM\ManyToOne(targetEntity="PW\LouvreBundle\Entity\Reservation")
+      * @ORM\JoinColumn(nullable=false)
+      */
+    private $reservation;
 
 
     /**
@@ -163,26 +163,26 @@ class Visitor
     }
 
     /**
-     * Set advert
+     * Set reservation
      *
-     * @param \PW\LouvreBundle\Entity\Reservation $advert
+     * @param \PW\LouvreBundle\Entity\Reservation $reservation
      *
      * @return Visitor
      */
-    public function setAdvert(\PW\LouvreBundle\Entity\Reservation $advert)
+    public function setReservation(\PW\LouvreBundle\Entity\Reservation $reservation)
     {
-        $this->advert = $advert;
+        $this->reservation = $reservation;
 
         return $this;
     }
 
     /**
-     * Get advert
+     * Get reservation
      *
      * @return \PW\LouvreBundle\Entity\Reservation
      */
-    public function getAdvert()
+    public function getReservation()
     {
-        return $this->advert;
+        return $this->reservation;
     }
 }

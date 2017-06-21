@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use PW\LouvreBundle\Form\ReservationType;
 use PW\LouvreBundle\Entity\Reservation;
+use PW\LouvreBundle\Entity\Visitor;
+use Symfony\Component\HttpFoundation\Session;
 use \DateTime;
 
 class CoreController extends Controller
@@ -34,7 +36,7 @@ class CoreController extends Controller
           ));
 
         }
-
+        
         //Si la date est bonne on verifie si le nombre de réservation maximum pour ce jour est atteint
         $repository = $this
         ->getDoctrine()
@@ -68,11 +70,10 @@ class CoreController extends Controller
           ));
         }
         
-        $request->getSession()->getFlashBag()->add('notice', 'c bon');
 
-        return $this->render('PWLouvreBundle:Core:index.html.twig', array(
-          'form' => $form->createView(),
-        ));
+        $this->get('session')->set('ObjReservation', serialize($reservation));
+
+        return $this->redirectToRoute('pw_louvre_reservation');
       }
     }
 
@@ -82,10 +83,22 @@ class CoreController extends Controller
     ));
   }
 
-  public function reservationAction($id)
+  public function reservationAction()
   {
+
+    $reservation = unserialize($this->get('session')->get('ObjReservation'));
+$visitor = new visitor();
+$visitor2 = new visitor();
+
+$reservation->getVisitors()->add($visitor);
+$reservation->getVisitors()->add($visitor2);
+
+    $form   = $this->createForm(ReservationType::class, $reservation);
+    
+
     return $this->render('PWLouvreBundle:Core:reservation.html.twig', array(
-      'id' => $id
+      'form' => $form->createView(),
+      'reservation' => $reservation
     ));
   }
 }

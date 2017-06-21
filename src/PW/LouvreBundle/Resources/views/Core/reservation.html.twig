@@ -9,7 +9,22 @@
 <p>Selectionner la date</p>
 <p>Nombre de tickets</p>
 
-{{ reservation.date|date("m/d/Y") }}
+{{ reservation.date|date("d/m/Y") }}
+{{ reservation.nombre }}
 
+<div class="well">
 
+{{ form_start(form) }}
+    
+
+    <h3>Tags</h3>
+    <ul class="tags">
+        {# iterate over each existing tag and render its only field: name #}
+        {% for visitor in form.visitors %}
+            <li>{{ form_row(visitor.nom) }}</li>
+        {% endfor %}
+    </ul>
+{{ form_end(form) }}
+
+</div>
 {% endblock %}
