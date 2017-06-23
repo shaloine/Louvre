@@ -49,12 +49,24 @@ class Visitor
      */
     private $dateNaissance;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="reduit", type="boolean")
+     */
+    private $reduit;
+
      /**
       * @ORM\ManyToOne(targetEntity="PW\LouvreBundle\Entity\Reservation")
       * @ORM\JoinColumn(nullable=false)
       */
     private $reservation;
 
+    public function __construct()
+    {
+      $this->reduit = false;
+      $this->dateNaissance = new \Datetime();
+    }
 
     /**
      * Get id
@@ -184,5 +196,29 @@ class Visitor
     public function getReservation()
     {
         return $this->reservation;
+    }
+
+    /**
+     * Set reduit
+     *
+     * @param boolean $reduit
+     *
+     * @return Visitor
+     */
+    public function setReduit($reduit)
+    {
+        $this->reduit = $reduit;
+
+        return $this;
+    }
+
+    /**
+     * Get reduit
+     *
+     * @return boolean
+     */
+    public function getReduit()
+    {
+        return $this->reduit;
     }
 }

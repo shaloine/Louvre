@@ -6,25 +6,35 @@
 
 {% block body %}
 
-<p>Selectionner la date</p>
-<p>Nombre de tickets</p>
 
-{{ reservation.date|date("d/m/Y") }}
-{{ reservation.nombre }}
 
-<div class="well">
+  {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
-{{ form_start(form) }}
-    
-
-    <h3>Tags</h3>
-    <ul class="tags">
-        {# iterate over each existing tag and render its only field: name #}
-        {% for visitor in form.visitors %}
-            <li>{{ form_row(visitor.nom) }}</li>
-        {% endfor %}
-    </ul>
-{{ form_end(form) }}
-
+  {{ form_errors(form) }}
+<div class="hidden">
+  {{ form_row(form.date) }}
+  {{ form_row(form.demi) }}
+  {{ form_row(form.nombre) }}
+  {{ form_row(form.mail) }}
 </div>
+
+  {% for visitor in form.visitors %}
+
+    <div class="well">
+      <h3>Ticket</h3>
+      {{ form_row(visitor.nom) }}
+      {{ form_row(visitor.prenom) }}
+      {{ form_row(visitor.pays) }}
+      {{ form_row(visitor.dateNaissance) }}
+      {{ form_row(visitor.reduit) }}
+
+    </div>
+
+  {% endfor %}
+  
+  {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+
+  {{ form_end(form) }}
+
+
 {% endblock %}

@@ -24,7 +24,7 @@ class ReservationType extends AbstractType
         ->add('nombre',     NumberType::class, array('label' => 'Nombre de visiteur'))
         ->add('demi',   ChoiceType::class, array('label' => 'Durée de la visite', 'choices' => array('Journée' => true, 'Demi-journée' =>false), 'expanded' => true))
         ->add('mail',   EmailType::class, array('label' => 'Veuillez saisir votre adresse mail'))
-        ->add('visitors', CollectionType::class, array('entry_type' => VisitorType::class, 'attr' => ['class' => 'test']))
+        ->add('visitors', CollectionType::class, array('entry_type' => VisitorType::class, 'label' => false))
         ->add('save',      SubmitType::class, array('label' => 'Réserver'))
         ;
     }

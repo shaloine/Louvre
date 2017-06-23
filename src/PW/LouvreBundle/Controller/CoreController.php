@@ -83,17 +83,29 @@ class CoreController extends Controller
     ));
   }
 
-  public function reservationAction()
+  public function reservationAction(Request $request)
   {
 
     $reservation = unserialize($this->get('session')->get('ObjReservation'));
-$visitor = new visitor();
-$visitor2 = new visitor();
+    $nbTickets = $reservation->getNombre();
 
-$reservation->getVisitors()->add($visitor);
-$reservation->getVisitors()->add($visitor2);
-
+    for ($i = 0; $i < $nbTickets; $i++){
+      $visitor = new visitor();
+      $reservation->getVisitors()->add($visitor);
+    }
     $form   = $this->createForm(ReservationType::class, $reservation);
+
+    if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+
+var_dump($reservation);
+     
+    }
+
+
+    
+
+
+   
     
 
     return $this->render('PWLouvreBundle:Core:reservation.html.twig', array(
