@@ -51,7 +51,7 @@ class Reservation
     private $demi;
 
     /**
-     * @ORM\OneToMany(targetEntity="PW\LouvreBundle\Entity\Visitor", mappedBy="reservation", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="PW\LouvreBundle\Entity\Visitor", mappedBy="reservation",cascade={"persist"})
      */
     protected $visitors;
 

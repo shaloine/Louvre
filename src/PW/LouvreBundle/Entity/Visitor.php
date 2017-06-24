@@ -57,7 +57,7 @@ class Visitor
     private $reduit;
 
      /**
-      * @ORM\ManyToOne(targetEntity="PW\LouvreBundle\Entity\Reservation")
+      * @ORM\ManyToOne(targetEntity="PW\LouvreBundle\Entity\Reservation", inversedBy="visitors")
       * @ORM\JoinColumn(nullable=false)
       */
     private $reservation;
