@@ -7,3 +7,13 @@ pw_louvre_reservation:
     path:      /reservation
     defaults:
         _controller: PWLouvreBundle:Core:reservation
+
+pw_louvre_confirmation:
+    path:      /confirmation
+    defaults:
+        _controller: PWLouvreBundle:Core:confirmation
+
+pw_louvre_validation:
+    path:      /validation
+    defaults:
+        _controller: PWLouvreBundle:Core:validation

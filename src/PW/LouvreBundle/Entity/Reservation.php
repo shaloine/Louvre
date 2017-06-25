@@ -51,6 +51,13 @@ class Reservation
     private $demi;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="prixTotal", type="integer")
+     */
+    private $prixTotal;
+
+    /**
      * @ORM\OneToMany(targetEntity="PW\LouvreBundle\Entity\Visitor", mappedBy="reservation",cascade={"persist"})
      */
     protected $visitors;
@@ -201,5 +208,29 @@ class Reservation
     public function getVisitors()
     {
         return $this->visitors;
+    }
+
+    /**
+     * Set prixTotal
+     *
+     * @param integer $prixTotal
+     *
+     * @return Reservation
+     */
+    public function setPrixTotal($prixTotal)
+    {
+        $this->prixTotal = $prixTotal;
+
+        return $this;
+    }
+
+    /**
+     * Get prixTotal
+     *
+     * @return integer
+     */
+    public function getPrixTotal()
+    {
+        return $this->prixTotal;
     }
 }

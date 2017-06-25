@@ -56,6 +56,13 @@ class Visitor
      */
     private $reduit;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="prix", type="integer")
+     */
+    private $prix;
+
      /**
       * @ORM\ManyToOne(targetEntity="PW\LouvreBundle\Entity\Reservation", inversedBy="visitors")
       * @ORM\JoinColumn(nullable=false)
@@ -220,5 +227,29 @@ class Visitor
     public function getReduit()
     {
         return $this->reduit;
+    }
+
+    /**
+     * Set prix
+     *
+     * @param integer $prix
+     *
+     * @return Visitor
+     */
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    /**
+     * Get prix
+     *
+     * @return integer
+     */
+    public function getPrix()
+    {
+        return $this->prix;
     }
 }

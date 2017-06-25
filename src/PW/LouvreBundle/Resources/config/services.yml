@@ -1,4 +1,10 @@
 services:
     pw_louvre.dateControl:
         class: PW\LouvreBundle\Services\PWDateControl
+    pw_louvre.ageCalculation:
+        class: PW\LouvreBundle\Services\PWAgeCalculation    
+    pw_louvre.priceCalculation:
+        class: PW\LouvreBundle\Services\PWPriceCalculation
+        arguments: 
+          - "@pw_louvre.ageCalculation"
 

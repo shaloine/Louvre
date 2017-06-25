@@ -32,8 +32,8 @@ class CoreController extends Controller
         if($dateControl->isDateCorrect($request, $reservation)){
 
           return $this->render('PWLouvreBundle:Core:index.html.twig', array(
-          'form' => $form->createView(),
-          ));
+            'form' => $form->createView(),
+            ));
 
         }
         
@@ -52,7 +52,7 @@ class CoreController extends Controller
 
         $listVisitor = $repository->findBy(
           array('date' => $date)
-        );
+          );
 
         $totalvisite = 0;
 
@@ -67,7 +67,7 @@ class CoreController extends Controller
 
           return $this->render('PWLouvreBundle:Core:index.html.twig', array(
             'form' => $form->createView(),
-          ));
+            ));
         }
         
 
@@ -80,7 +80,7 @@ class CoreController extends Controller
 
     return $this->render('PWLouvreBundle:Core:index.html.twig', array(
       'form' => $form->createView(),
-    ));
+      ));
   }
 
   public function reservationAction(Request $request)
@@ -89,36 +89,48 @@ class CoreController extends Controller
     $reservation = unserialize($this->get('session')->get('ObjReservation'));
     $nbTickets = $reservation->getNombre();
 
-    for ($i = 0; $i < $nbTickets; $i++){
-      $visitor = new visitor();
-      $reservation->addVisitor($visitor);
+    if ( count($reservation->getVisitors()) == 0 ){
+      for ($i = 0; $i < $nbTickets; $i++){
+        $visitor = new visitor();
+        $reservation->addVisitor($visitor);
+      }
     }
+
+    
     $form   = $this->createForm(ReservationType::class, $reservation);
 
     if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
 
-      $em = $this->getDoctrine()->getManager();
-      $em->persist($reservation);
-      $em->flush();
+      $prix = $this->container->get('pw_louvre.priceCalculation');
 
-      
+      $prix->setPrice($reservation);
 
-      return $this->render('PWLouvreBundle:Core:reservation.html.twig', array(
-      'form' => $form->createView(),
-      'reservation' => $reservation
-    ));
+      $this->get('session')->set('ObjReservation', serialize($reservation));
+
+      return $this->redirectToRoute('pw_louvre_confirmation');
+
     }
-
-
-    
-
-
-   
-    
 
     return $this->render('PWLouvreBundle:Core:reservation.html.twig', array(
       'form' => $form->createView(),
       'reservation' => $reservation
-    ));
+      ));
   }
+
+  public function confirmationAction(Request $request)
+  {
+    $reservation = unserialize($this->get('session')->get('ObjReservation'));
+
+    return $this->render('PWLouvreBundle:Core:confirmation.html.twig', array(
+      'reservation' => $reservation
+      ));
+    
+  }
+
+  public function validationAction(Request $request)
+  {
+
+
+  }
+
 }

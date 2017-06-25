@@ -5,9 +5,10 @@
 {% endblock %}
 
 {% block body %}
-
-
-
+  <h3>tarifs</h3>
+<p>Tarif normal : 16€</p>
+<p>Tarif normal : 16€</p>
+<h3>informations</h3>
   {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
   {{ form_errors(form) }}
@@ -35,18 +36,5 @@
   {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
 
   {{ form_end(form) }}
-<form action="{{ path('pw_louvre_home') }}" method="POST">
-  <script
-    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-    data-key="pk_test_m9XzhzTxE4uiwBGZ2fCBsywn"
-    data-amount="999"
-    data-name="Demo Site"
-    data-description="Widget"
-    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-    data-locale="auto"
-    data-zip-code="true"
-    data-currency="eur">
-  </script>
-</form>
 
 {% endblock %}

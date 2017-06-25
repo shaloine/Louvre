@@ -51,7 +51,14 @@ class Reservation
     private $demi;
 
     /**
-     * @ORM\OneToMany(targetEntity="PW\LouvreBundle\Entity\Visitor", mappedBy="reservation")
+     * @var integer
+     *
+     * @ORM\Column(name="prixTotal", type="integer")
+     */
+    private $prixTotal;
+
+    /**
+     * @ORM\OneToMany(targetEntity="PW\LouvreBundle\Entity\Visitor", mappedBy="reservation",cascade={"persist"})
      */
     protected $visitors;
 
