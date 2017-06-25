@@ -11,7 +11,7 @@
       <p>{{ visitor.nom }}</p>
       <p>{{ visitor.prenom }}</p>
       <p>{{ visitor.dateNaissance|date("d/m/Y") }}</p>
-      <p>{{ visitor.prix }}</p>
+      <p>{{ visitor.prix }} €</p>
       {% if visitor.reduit == true %}
         <p><i>montrer justificatif</i></p>
       {% endif %}
@@ -30,7 +30,7 @@
 
   </div>
 
-  <form action="{{ path('pw_louvre_home') }}" method="POST">
+  <form action="{{ path('pw_louvre_validation') }}" method="POST">
     <script
     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
     data-key="pk_test_m9XzhzTxE4uiwBGZ2fCBsywn"
@@ -39,11 +39,15 @@
     data-description="Widget"
     data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
     data-locale="auto"
-    data-zip-code="true"
+    data-zip-code="false"
+    data-label="Procéder au paiement"
     data-currency="eur">
   </script>
 </form>
+
 <a type="button" class="btn btn-primary" href="{{ path('pw_louvre_reservation') }}">
   Modifier
 </a>
 {% endblock %}
+
+

@@ -130,6 +130,23 @@ class CoreController extends Controller
   public function validationAction(Request $request)
   {
 
+    \Stripe\Stripe::setApiKey('sk_test_ir6jSvCnyFyRyYgqNQYfQlIG');  
+    $token  = $_POST['stripeToken'];
+    $stripeinfo = \Stripe\Token::retrieve($token);
+    $email = $stripeinfo->email;
+
+    $customer = \Stripe\Customer::create(array(
+      'email' => $email,
+      'source'  => $token
+      ));
+
+    $charge = \Stripe\Charge::create(array(
+      'customer' => $customer->id,
+      'amount'   => 5000,
+      'currency' => 'eur'
+      ));
+
+    return $this->render('PWLouvreBundle:Core:validation.html.twig');
 
   }
 
