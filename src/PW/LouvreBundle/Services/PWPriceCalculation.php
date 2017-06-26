@@ -17,9 +17,10 @@ class PWPriceCalculation
 	{
 
 		$total = 0;
-		$price = 16;
 		
 		foreach ($reservation->getVisitors() as $i => $visitor) {
+
+			$price = 16;
 
 			$age = $this->ageCalculation->getAge($visitor);
 

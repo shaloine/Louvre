@@ -9,9 +9,9 @@
   {% endblock %}
 {% block body %}
 
- <div class="jumbotron">
-  <h3>Bienvenue sur le site de réservation en ligne du Louvre</h3>
-</div>  
+
+  <h3 class="indexTitle">Musée du Louvre</h3>
+
 {% for message in app.session.flashbag.get('notice') %}
 
         <p>Message flash : {{ message }}</p>
@@ -25,7 +25,6 @@
   {{ form_row(form.date) }}
   {{ form_row(form.demi) }}
   {{ form_row(form.nombre) }}
-  {{ form_row(form.mail) }}
 
 
   {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}

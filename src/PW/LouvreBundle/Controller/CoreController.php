@@ -129,6 +129,7 @@ class CoreController extends Controller
 
   public function validationAction(Request $request)
   {
+    $reservation = unserialize($this->get('session')->get('ObjReservation'));
 
     \Stripe\Stripe::setApiKey('sk_test_ir6jSvCnyFyRyYgqNQYfQlIG');  
     $token  = $_POST['stripeToken'];
