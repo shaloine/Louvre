@@ -29,3 +29,22 @@ body {
 .indexLabel {
     padding-bottom: 10px;
 }
+.indexDemi{
+    background: none !important;
+    border: none!important;
+    box-shadow: none!important;
+}
+.radio{
+  padding-right: 25px;
+}
+#pw_louvrebundle_reservation_nombre {
+    min-width: 140px;
+}
+@ media screen and (max-width: 768px)
+
+{
+  .indexForm {
+    padding: 0px;
+  }  
+
+}
