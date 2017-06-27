@@ -9,23 +9,43 @@
   {% endblock %}
 {% block body %}
 
-
   <h3 class="indexTitle">Musée du Louvre</h3>
+
+<div class="well">
 
 {% for message in app.session.flashbag.get('notice') %}
 
         <p>Message flash : {{ message }}</p>
 
       {% endfor %}
-<div class="well">
-  {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+  {{ form_start(form, {'attr': {'class': 'form-inline'}}) }}
 
   {{ form_errors(form) }}
 
-  {{ form_row(form.date) }}
-  {{ form_row(form.demi) }}
-  {{ form_row(form.nombre) }}
+  <div class="form-group indexForm">
+    {{ form_label(form.date, "Date de la réservation", {'label_attr': {'class': 'control-label indexLabel'}}) }}
+    {{ form_errors(form.date) }}
+    <div>
+      {{ form_widget(form.date, {'attr': {'class': 'form-control js-datepicker'}}) }}
+    </div>
+  </div>
 
+  <div class="form-group indexForm">
+    {{ form_label(form.nombre, "Nombre de visiteur", {'label_attr': {'class': 'control-label  indexLabel'}}) }}
+    {{ form_errors(form.nombre) }}
+    <div>
+      {{ form_widget(form.nombre, {'attr': {'class': 'form-control'}}) }}
+    </div>
+  </div>
+
+  <div class="form-group indexForm">
+    {{ form_label(form.demi, "Durée de la visite", {'label_attr': {'class': 'control-label  indexLabel'}}) }}
+    {{ form_errors(form.demi) }}
+    <div>
+      {{ form_widget(form.demi, {'attr': {'class': 'form-control'}}) }}
+    </div>
+  </div>
 
   {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
 
@@ -39,19 +59,11 @@
   {{ parent() }}
   <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
 
+  {% javascripts '@PWLouvreBundle/Resources/public/js/*' %}
+        <script src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+
   <script>
-    $.fn.datepicker.dates['fr'] = {
-      days: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
-      daysShort: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
-      daysMin: ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"],
-      months: ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre"],
-      monthsShort: ["Jan", "Fev", "Mar", "Avr", "Mai", "Juin", "Juil", "Aoû", "Sep", "Oct", "Nov", "Dec"],
-      today: "Aujourd'hui",
-      clear: "Effacer",
-      format: "dd/mm/yyyy",
-      titleFormat: "MM yyyy", /* Leverages same syntax as 'format' */
-      weekStart: 1
-    };
     jQuery(document).ready(function() {
       $('.js-datepicker').datepicker({
         format: 'dd/mm/yyyy',

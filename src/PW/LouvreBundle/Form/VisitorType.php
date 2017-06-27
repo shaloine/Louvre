@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 
 class VisitorType extends AbstractType
 {
@@ -22,11 +23,10 @@ class VisitorType extends AbstractType
         $builder
         ->add('nom',    TextType::class)
         ->add('prenom',    TextType::class)
-        ->add('pays',    TextType::class)
-        ->add('dateNaissance',      BirthdayType::class, array('format' => 'dd/MM/yyyy', 'label' => 'Date de naissance'))
+        ->add('pays',    CountryType::class, array('preferred_choices' => array('FR')))
+        ->add('dateNaissance',      BirthdayType::class, array('format' => 'dd/MM/yyyy', 'label' => 'Date de naissance', 'widget' => 'single_text', 'html5' => false,'model_timezone' => 'Europe/Paris', 'attr' => ['class' => 'js-datepicker']))
         ->add('reduit',    CheckboxType::class, array('label' => 'Tarif réduit', 'required' => false));
     }
-    
     /**
      * {@inheritdoc}
      */

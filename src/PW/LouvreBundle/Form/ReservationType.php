@@ -8,21 +8,26 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use PW\LouvreBundle\Form\VisitorType;
 class ReservationType extends AbstractType
 {
+
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $nbArray = array();
+        for ($i=1; $i <= 50; $i++) { 
+            $nbArray[$i] = $i;
+        }
+
         $builder
-        ->add('date',      DateType::class, array('label' => 'Date de la réservation', 'widget' => 'single_text', 'html5' => false, 'attr' => ['class' => 'js-datepicker'], 'format' => 'dd/MM/yyyy', 'model_timezone' => 'Europe/Paris'))
-        ->add('nombre',     NumberType::class, array('label' => 'Nombre de visiteur'))
-        ->add('demi',   ChoiceType::class, array('label' => 'Durée de la visite', 'choices' => array('Journée' => true, 'Demi-journée' =>false), 'expanded' => true))
+        ->add('date',      DateType::class, array('widget' => 'single_text', 'html5' => false, 'format' => 'dd/MM/yyyy', 'model_timezone' => 'Europe/Paris'))
+        ->add('nombre',     ChoiceType::class, array('choices' =>$nbArray))
+        ->add('demi',   ChoiceType::class, array('choices' => array('Journée' => true, 'Demi-journée' =>false), 'expanded' => true))
         ->add('visitors', CollectionType::class, array('entry_type' => VisitorType::class, 'label' => false))
         ->add('save',      SubmitType::class, array('label' => 'Réserver'))
         ;

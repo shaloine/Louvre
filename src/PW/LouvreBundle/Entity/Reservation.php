@@ -67,6 +67,7 @@ class Reservation
       $this->date = new \Datetime();
       $this->demi = true;
       $this->visitors = new ArrayCollection();
+      $this->nombre = 1;
     }
     /**
      * Get id

@@ -12,4 +12,20 @@ body {
     font-weight: bold;
     text-align: center;
     text-shadow: 5px 5px 7px black;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.container{
+  height: 100%;
+}
+.form-inline {
+    text-align: center;
+}
+.indexForm {
+    padding: 20px;
+    text-align: left;
+}
+.indexLabel {
+    padding-bottom: 10px;
 }
