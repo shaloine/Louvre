@@ -5,9 +5,10 @@ body {
   -webkit-background-size: cover; /* pour anciens Chrome et Safari */
   background-size: cover; /* version standardisée */
 }
+/* index */
 .indexTitle{
 	color: white;
-    font-family: Lucida Grande;
+    font-family: 'Lora', serif;
     font-size: 60px;
     font-weight: bold;
     text-align: center;
@@ -15,7 +16,6 @@ body {
     margin-top: 50px;
     margin-bottom: 50px;
 }
-
 .container{
   height: 100%;
 }
@@ -23,11 +23,12 @@ body {
     text-align: center;
 }
 .indexForm {
-    padding: 20px;
+    padding: 40px;
     text-align: left;
 }
 .indexLabel {
     padding-bottom: 10px;
+    color: white;
 }
 .indexDemi{
     background: none !important;
@@ -36,15 +37,53 @@ body {
 }
 .radio{
   padding-right: 25px;
+  color: white;
 }
 #pw_louvrebundle_reservation_nombre {
     min-width: 140px;
 }
-@ media screen and (max-width: 768px)
+.indexFormContainer{
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 10px;
+  border-radius: 10px;
+}
+.submitBtn {
+    width: 110px;
+    height: 40px;
+    margin-right: 20px;
+}
+.submitBtn:hover {
+    background-color: #D1D1D1;
+}
+
+@media screen and (max-width: 1200px)
+
+{
+  .submitBtn {
+    margin-bottom: 20px !important;
+  } 
+
+}
+@media screen and (max-width: 992px)
+
+{
+  .indexForm {
+    padding: 20px;
+    margin-bottom: 40px !important;
+  }  
+
+}
+@media screen and (max-width: 768px)
 
 {
   .indexForm {
     padding: 0px;
   }  
-
+  .submitBtn {
+    margin-bottom: 0px !important;
+    margin-top: 15px;
+  } 
+  .radio{
+  margin-top: 0 !important;
+  }
 }

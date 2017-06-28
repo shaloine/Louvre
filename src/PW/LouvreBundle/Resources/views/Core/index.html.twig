@@ -11,7 +11,7 @@
 
   <h3 class="indexTitle">Musée du Louvre</h3>
 
-<div class="well">
+<div class="indexFormContainer">
 
 {% for message in app.session.flashbag.get('notice') %}
 
@@ -47,7 +47,7 @@
     </div>
   </div>
 
-  {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+  {{ form_widget(form.save, {'attr': {'class': 'btn submitBtn'}}) }}
 
   {{ form_rest(form) }}
 
