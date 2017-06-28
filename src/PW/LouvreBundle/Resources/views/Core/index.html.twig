@@ -8,14 +8,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker3.css"></script>
   {% endblock %}
 {% block body %}
-
-  <h3 class="indexTitle">Musée du Louvre</h3>
-
+  {{ parent() }}
 <div class="indexFormContainer">
 
 {% for message in app.session.flashbag.get('notice') %}
 
-        <p>Message flash : {{ message }}</p>
+        <p class="indexFlash"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{ message }} <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span></p>
 
       {% endfor %}
 

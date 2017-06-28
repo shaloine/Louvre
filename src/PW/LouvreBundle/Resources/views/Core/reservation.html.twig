@@ -8,10 +8,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker3.css"></script>
   {% endblock %}
 {% block body %}
-  <h3>tarifs</h3>
-<p>Tarif normal : 16€</p>
-<p>Tarif normal : 16€</p>
-<h3>informations</h3>
+
+  {{ parent() }}
+
+  <div class="topContainer">
+    <h3>Tarification</h3>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4">Tarif normal : 16€</div>
+        <div class="col-sm-4">Tarif enfant (4 à 11 ans) : 8€</div>
+        <div class="col-sm-4">Tarif sénior (plus de 60ans) : 12€</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">Tarif réduit : 10€</div>
+        <div class="col-sm-4">Enfant de moins de 4 ans : gratuit</div>
+      </div>
+    </div>
+  </div>
+
   {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
   {{ form_errors(form) }}
@@ -23,19 +37,25 @@
 
   {% for visitor in form.visitors %}
 
-    <div class="well">
-      <h3>Ticket</h3>
-      {{ form_row(visitor.nom) }}
-      {{ form_row(visitor.prenom) }}
-      {{ form_row(visitor.pays) }}
-      {{ form_row(visitor.dateNaissance) }}
+    <div class="well reservationForm">
+      <h3>Informations visiteur {{ loop.index }}</h3>
+      <div class="row">
+        <div class="col-sm-5">{{ form_row(visitor.nom) }}</div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5">{{ form_row(visitor.prenom) }}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-5">{{ form_row(visitor.pays) }}</div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5">{{ form_row(visitor.dateNaissance) }}</div>
+      </div>
       {{ form_row(visitor.reduit) }}
-
     </div>
 
   {% endfor %}
   
-  {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+  {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary pull-right'}}) }}
+  <a type="button" class="btn btn-danger " href="{{ path('pw_louvre_home') }}">Annuler</a>
 
   {{ form_end(form) }}
 

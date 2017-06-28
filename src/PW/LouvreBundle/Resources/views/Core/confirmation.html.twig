@@ -6,29 +6,38 @@
 
 {% block body %}
 
+  {{ parent() }}
+
+  <div class="topContainer">
+    <h3>Récapitulatif</h3>
+    <p> Date : {{ reservation.date|date("m/d/Y") }} - 
+    {% if reservation.demi %}
+      Journee entiere
+    {% else %}
+      Demi journé
+    {% endif %}
+    </p>
+    <p class="total">Total : {{ reservation.prixTotal }} € </p>
+    
+  </div>
+
   {% for visitor in reservation.visitors %}
-    <div class="well">
-      <p>{{ visitor.nom }}</p>
-      <p>{{ visitor.prenom }}</p>
-      <p>{{ visitor.dateNaissance|date("d/m/Y") }}</p>
-      <p>{{ visitor.prix }} €</p>
+    <div class="well confirmationContainer">
+      <h3>Ticket N° {{ loop.index }}</h3>
+      <div class="row">
+        <div class="col-sm-3"><b>Nom :</b> {{ visitor.nom }}</div>
+        <div class="col-sm-3"><b>Prénom :</b> {{ visitor.prenom }}</div>
+        <div class="col-sm-3"><b>Date de naissance :</b> {{ visitor.dateNaissance|date("d/m/Y") }}</div>
+        <div class="col-sm-3"><b>Tarif :</b> {{ visitor.prix }} €</div>
+      </div>
+
       {% if visitor.reduit == true %}
         <p><i>montrer justificatif</i></p>
       {% endif %}
     </div>
   {% endfor %}
 
-  <div class="well">
-    {{ reservation.date|date("m/d/Y") }}
-    {{ reservation.prixTotal }}
-    {% if reservation.demi %}
-      <p>Journee entiere</p>
-    {% else %}
-      <p>Demi journé</p>
-    {% endif %}
-
-
-  </div>
+  
 
   <form action="{{ path('pw_louvre_validation') }}" method="POST">
     <script
@@ -45,7 +54,7 @@
   </script>
 </form>
 
-<a type="button" class="btn btn-primary" href="{{ path('pw_louvre_reservation') }}">
+  <a type="button" class="btn btn-danger" href="{{ path('pw_louvre_reservation') }}">
   Modifier
 </a>
 {% endblock %}

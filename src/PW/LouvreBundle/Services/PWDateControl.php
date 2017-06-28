@@ -29,7 +29,7 @@ class PWDateControl
   		// si le jour est un mardi ou un dimanche
 		if ($reservationDate->format('w') == 2 || $reservationDate->format('w') == 0){
 
-			$request->getSession()->getFlashBag()->add('notice', 'La reservation n\'est pas disponible pour les mardis ou les dimanches');
+			$request->getSession()->getFlashBag()->add('notice', 'La réservation n\'est pas disponible pour les mardis ou les dimanches');
 
 			return true;
 		}
@@ -41,7 +41,7 @@ class PWDateControl
 
 		if ($reservation->getDemi() == true && $reservationDate->format('d/m/Y') == $todayDate && $todayHour >= '14'){
 
-			$request->getSession()->getFlashBag()->add('notice', 'La reservation journée entière n\'est pas disponible après 14h00');
+			$request->getSession()->getFlashBag()->add('notice', 'La réservation journée entière n\'est pas disponible après 14h00');
 
 			return true;
 		}
