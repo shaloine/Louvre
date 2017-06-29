@@ -32,7 +32,7 @@
       </div>
 
       {% if visitor.reduit == true %}
-        <p><i>montrer justificatif</i></p>
+        <p class="tarifreduit"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Tarif réduit : un justificatif vous sera demandé à l'entrée du musée <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span></p>
       {% endif %}
     </div>
   {% endfor %}
@@ -44,12 +44,13 @@
     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
     data-key="pk_test_m9XzhzTxE4uiwBGZ2fCBsywn"
     data-amount="{{ reservation.prixTotal }}00"
-    data-name="Demo Site"
-    data-description="Widget"
-    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+    data-name="Paiement"
+    data-description=""
+    data-image= "{{ asset('images/louvre_logo_checkout.png') }}"
     data-locale="auto"
     data-zip-code="false"
     data-label="Procéder au paiement"
+    data-allow-remember-me = "false" 
     data-currency="eur">
   </script>
 </form>
