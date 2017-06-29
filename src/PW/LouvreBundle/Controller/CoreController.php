@@ -14,7 +14,6 @@ class CoreController extends Controller
 {
   public function indexAction(Request $request)
   {
-
     $reservation = new Reservation();
 
     $form   = $this->createForm(ReservationType::class, $reservation);
@@ -63,7 +62,7 @@ class CoreController extends Controller
 
         if (($totalvisite + $reservation->getNombre()) > 1000){
 
-          $request->getSession()->getFlashBag()->add('notice', 'Plus de places disponible pour cette date');
+          $request->getSession()->getFlashBag()->add('notice', 'Plus de places disponibles pour cette date');
 
           return $this->render('PWLouvreBundle:Core:index.html.twig', array(
             'form' => $form->createView(),
@@ -133,8 +132,14 @@ class CoreController extends Controller
 
     \Stripe\Stripe::setApiKey('sk_test_ir6jSvCnyFyRyYgqNQYfQlIG');  
     $token  = $_POST['stripeToken'];
-    $stripeinfo = \Stripe\Token::retrieve($token);
-    $email = $stripeinfo->email;
+    $email = $_POST['stripeEmail'];
+
+    $codeUnique = uniqid(rand());
+    
+    $reservation->setMail($email);
+    $reservation->setCode($codeUnique);
+
+    $amount = ($reservation->getPrixTotal())*100;
 
     $customer = \Stripe\Customer::create(array(
       'email' => $email,
@@ -143,9 +148,13 @@ class CoreController extends Controller
 
     $charge = \Stripe\Charge::create(array(
       'customer' => $customer->id,
-      'amount'   => 5000,
+      'amount'   => $amount,
       'currency' => 'eur'
       ));
+
+    $em = $this->getDoctrine()->getManager();
+    $em->persist($reservation);
+    $em->flush();
 
     return $this->render('PWLouvreBundle:Core:validation.html.twig');
 

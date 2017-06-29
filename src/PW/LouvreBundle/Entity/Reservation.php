@@ -58,6 +58,13 @@ class Reservation
     private $prixTotal;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="code", type="string", length=255)
+     */
+    private $code;
+
+    /**
      * @ORM\OneToMany(targetEntity="PW\LouvreBundle\Entity\Visitor", mappedBy="reservation",cascade={"persist"})
      */
     protected $visitors;
@@ -233,5 +240,29 @@ class Reservation
     public function getPrixTotal()
     {
         return $this->prixTotal;
+    }
+
+    /**
+     * Set code
+     *
+     * @param string $code
+     *
+     * @return Reservation
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
     }
 }
