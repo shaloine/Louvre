@@ -7,7 +7,9 @@
 {% block body %}
 
   {{ parent() }}
-
+  {% for message in app.session.flashbag.get('notice') %}
+        <div class="errorCheckout"> {{ message }} </div>
+   {% endfor %}
   <div class="topContainer">
     <h3>Récapitulatif</h3>
     <p> Date : {{ reservation.date|date("m/d/Y") }} - 

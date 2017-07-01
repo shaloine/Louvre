@@ -106,7 +106,6 @@ class CoreController extends Controller
     if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
 
       $prix = $this->container->get('pw_louvre.priceCalculation');
-
       $prix->setPrice($reservation);
 
       $this->get('session')->set('ObjReservation', serialize($reservation));
@@ -144,33 +143,38 @@ class CoreController extends Controller
       return $this->redirectToRoute('pw_louvre_home');
     }
 
-    \Stripe\Stripe::setApiKey('sk_test_ir6jSvCnyFyRyYgqNQYfQlIG');  
-    $token  = $_POST['stripeToken'];
-    $email = $_POST['stripeEmail'];
+     \Stripe\Stripe::setApiKey('sk_test_ir6jSvCnyFyRyYgqNQYfQlIG');
 
-    $codeUnique = uniqid(rand());
+    if ($request->isMethod('POST')){
+       
+      $token  = $_POST['stripeToken'];
+      $email = $_POST['stripeEmail'];
+
+      $codeUnique = uniqid(rand());
+
+      $reservation->setMail($email);
+      $reservation->setCode($codeUnique);
+
+      $amount = ($reservation->getPrixTotal())*100;
+
+    //action paiment et retour si erreur
+      $checkoutValidation = $this->container->get('pw_louvre.checkoutValidation');
+      $pass = $checkoutValidation->checkout($token, $email, $amount);
+
+      if(!$pass){
+        $request->getSession()->getFlashBag()->add('notice', 'Une erreur est survenue! Merci de vérifier vos informations et de recommencer le paiement.');
+        return $this->render('PWLouvreBundle:Core:confirmation.html.twig', array(
+          'reservation' => $reservation
+          ));
+      }
+
+      $em = $this->getDoctrine()->getManager();
+      $em->persist($reservation);
+      $em->flush();
+
+      $this->get('session')->set('ObjReservation', serialize($reservation));
+    } 
     
-    $reservation->setMail($email);
-    $reservation->setCode($codeUnique);
-
-    $amount = ($reservation->getPrixTotal())*100;
-
-    $customer = \Stripe\Customer::create(array(
-      'email' => $email,
-      'source'  => $token
-      ));
-
-    $charge = \Stripe\Charge::create(array(
-      'customer' => $customer->id,
-      'amount'   => $amount,
-      'currency' => 'eur'
-      ));
-
-    $em = $this->getDoctrine()->getManager();
-    $em->persist($reservation);
-    $em->flush();
-
-    $this->get('session')->set('ObjReservation', serialize($reservation));
 
     return $this->render('PWLouvreBundle:Core:validation.html.twig');
 

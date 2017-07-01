@@ -7,4 +7,6 @@ services:
         class: PW\LouvreBundle\Services\PWPriceCalculation
         arguments: 
           - "@pw_louvre.ageCalculation"
+    pw_louvre.checkoutValidation:
+        class: PW\LouvreBundle\Services\PWCheckoutValidation
 

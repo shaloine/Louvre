@@ -64,6 +64,13 @@ body {
   padding: 20px;
   margin-bottom: 20px;
 }
+.errorCheckout{
+  color: white;
+  background-color: rgba(255, 0, 0, 0.8);
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
 .topContainer h3 {
   margin-top: 0 !important;
 }
