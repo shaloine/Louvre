@@ -1,0 +1,20 @@
+{% extends "PWLouvreBundle::layout.html.twig" %}
+
+
+{% block title %}
+  Erreur 404 - page introuvable
+{% endblock %}
+
+{% block body %}
+
+  {{ parent() }}
+
+  <div class="topContainer">
+    <h3>Erreur 404 -Page introuvable</h3>
+
+    <p>La page à laquelle vous essayez d'accéder n'existe pas</p>
+    
+  </div>
+
+
+{% endblock %}

@@ -11,11 +11,11 @@
   <div class="topContainer">
     <h3>Récapitulatif</h3>
     <p> Date : {{ reservation.date|date("m/d/Y") }} - 
-    {% if reservation.demi %}
-      Journee entiere
-    {% else %}
-      Demi journé
-    {% endif %}
+      {% if reservation.demi %}
+        Journee entiere
+      {% else %}
+        Demi journée
+      {% endif %}
     </p>
     <p class="total">Total : {{ reservation.prixTotal }} € </p>
     
@@ -38,26 +38,30 @@
   {% endfor %}
 
   
-
-  <form action="{{ path('pw_louvre_validation') }}" method="POST">
-    <script
-    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-    data-key="pk_test_m9XzhzTxE4uiwBGZ2fCBsywn"
-    data-amount="{{ reservation.prixTotal }}00"
-    data-name="Paiement"
-    data-description=""
-    data-image= "{{ asset('images/louvre_logo_checkout.png') }}"
-    data-locale="auto"
-    data-zip-code="false"
-    data-label="Procéder au paiement"
-    data-allow-remember-me = "false" 
-    data-currency="eur">
-  </script>
-</form>
-
+  {% if reservation.id %}
+    <a type="button" class="btn btn-primary" href="{{ path('pw_louvre_home') }}">Effectuer une nouvelle commande</a>
+  {% else %}
+    <form action="{{ path('pw_louvre_validation') }}" method="POST">
+      <script
+      src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+      data-key="pk_test_m9XzhzTxE4uiwBGZ2fCBsywn"
+      data-amount="{{ reservation.prixTotal }}00"
+      data-name="Paiement"
+      data-description=""
+      data-image= "{{ asset('images/louvre_logo_checkout.png') }}"
+      data-locale="auto"
+      data-zip-code="false"
+      data-label="Procéder au paiement"
+      data-allow-remember-me = "false" 
+      data-currency="eur">
+    </script>
+  </form>
   <a type="button" class="btn btn-danger" href="{{ path('pw_louvre_reservation') }}">
   Modifier
 </a>
+{% endif %}
+
+
 {% endblock %}
 
 

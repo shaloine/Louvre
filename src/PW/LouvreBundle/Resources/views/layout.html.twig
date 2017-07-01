@@ -8,8 +8,8 @@
 
   {% block stylesheets %}
 
-    {% stylesheets 'bundles/pwlouvre/css/main.css' filter='cssrewrite' %}
-    <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+    {% stylesheets 'bundles/pwlouvre/css/main.css' filter='cssrewrite, scssphp' %}
+      <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
     {% endstylesheets %}
     <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet"> 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">

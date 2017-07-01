@@ -1,0 +1,21 @@
+{% extends "PWLouvreBundle::layout.html.twig" %}
+
+
+{% block title %}
+  Erreur: {{ status_text }}
+{% endblock %}
+
+{% block body %}
+
+  {{ parent() }}
+
+  <div class="topContainer">
+    <h3>{{ status_code }} {{ status_text }}</h3>
+
+    <p>Oops quelque chose ne s'est pas bien passé.</p>
+    <p><a class="white" href="{{ path('pw_louvre_home') }}">Aller à l'accueil</a></p>
+    
+  </div>
+
+
+{% endblock %}

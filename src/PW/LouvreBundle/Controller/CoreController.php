@@ -86,6 +86,11 @@ class CoreController extends Controller
   {
 
     $reservation = unserialize($this->get('session')->get('ObjReservation'));
+
+    if (!$reservation){
+      return $this->redirectToRoute('pw_louvre_home');
+    }
+
     $nbTickets = $reservation->getNombre();
 
     if ( count($reservation->getVisitors()) == 0 ){
@@ -120,6 +125,10 @@ class CoreController extends Controller
   {
     $reservation = unserialize($this->get('session')->get('ObjReservation'));
 
+    if (!$reservation){
+      return $this->redirectToRoute('pw_louvre_home');
+    }
+
     return $this->render('PWLouvreBundle:Core:confirmation.html.twig', array(
       'reservation' => $reservation
       ));
@@ -129,6 +138,11 @@ class CoreController extends Controller
   public function validationAction(Request $request)
   {
     $reservation = unserialize($this->get('session')->get('ObjReservation'));
+
+
+    if (!$reservation){
+      return $this->redirectToRoute('pw_louvre_home');
+    }
 
     \Stripe\Stripe::setApiKey('sk_test_ir6jSvCnyFyRyYgqNQYfQlIG');  
     $token  = $_POST['stripeToken'];
@@ -155,6 +169,8 @@ class CoreController extends Controller
     $em = $this->getDoctrine()->getManager();
     $em->persist($reservation);
     $em->flush();
+
+    $this->get('session')->set('ObjReservation', serialize($reservation));
 
     return $this->render('PWLouvreBundle:Core:validation.html.twig');
 
