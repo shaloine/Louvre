@@ -91,7 +91,9 @@ body {
 .confirmationContainer h3 {
   margin-top: 0px;
 }
-
+.validationTxt{
+  margin-bottom: 0px;
+}
 .stripe-button-el{
   float: right;
 -webkit-box-shadow: none !important;

@@ -6,5 +6,10 @@
 
 {% block body %}
 
-  <p> c'est bon on vous envoi un mail pour valider ça</p>
+  {{ parent() }}
+  <div class="topContainer">
+    <h3>Transaction effectuée</h3>
+    <p class="validationTxt">Un mail contenant votre réservation vous à été envoyé</p>
+  </div>
+ 
 {% endblock %}
