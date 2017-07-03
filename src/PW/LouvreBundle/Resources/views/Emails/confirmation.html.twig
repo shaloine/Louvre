@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <title>Le Louvre</title>
 
 </head>
@@ -14,9 +14,8 @@
 		<h3 class="Title">Musée du Louvre</h3>
 	<div>
 
-	<div>
-    	<h3>Votre réservation</h3>
-    	<p>Réservation N° {{ reservation.code }}</p>
+	<div style="color: white; background-color: #1e90cb; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
+    	<h3>Votre réservation N°{{ reservation.code }}</h3>
 		<p> 
 			Date : {{ reservation.date|date("m/d/Y") }} - 
       		{% if reservation.demi %}
@@ -25,16 +24,15 @@
         		Demi journée
       		{% endif %}
     	</p>
-    	<p>Total : {{ reservation.prixTotal }} € </p>
+    	<p style="margin-bottom: 0;">Total : {{ reservation.prixTotal }} € </p>
     </div>
     
     
   {% for visitor in reservation.visitors %}
-    <div>
-      <h3>Ticket N° {{ loop.index }}</h3>
+    <div style="background-color: #d9d9d9; padding: 10px;  padding-bottom: 1px; border-radius: 5px; margin-bottom: 10px;">
+      <h3 style="margin-top: 0;">Ticket N° {{ loop.index }}</h3>
       <div>
-        <div><b>Nom :</b> {{ visitor.nom }}</div>
-        <div><b>Prénom :</b> {{ visitor.prenom }}</div>
+        <div><b>Nom :</b> {{ visitor.nom }} <b>Prénom :</b> {{ visitor.prenom }}</div>
         <div><b>Date de naissance :</b> {{ visitor.dateNaissance|date("d/m/Y") }}</div>
         <div><b>Tarif :</b> {{ visitor.prix }} €</div>
       </div>
