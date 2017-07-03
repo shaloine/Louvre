@@ -1,15 +1,49 @@
-{% extends "PWLouvreBundle::layout.html.twig" %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-{% block title %}
-  Confirmation - {{ parent() }}
-{% endblock %}
+  <title>Le Louvre</title>
 
-{% block body %}
+</head>
 
-  {{ parent() }}
-  <p>tesssssssvxcvt</p>
+<body>
+	<div>
+		<img src="{{ absolute_url(asset('images/louvre_logo.png')) }}">
+		<h3 class="Title">Musée du Louvre</h3>
+	<div>
 
+	<div>
+    	<h3>Votre réservation</h3>
+    	<p>Réservation N° {{ reservation.code }}</p>
+		<p> 
+			Date : {{ reservation.date|date("m/d/Y") }} - 
+      		{% if reservation.demi %}
+        		Journee entiere
+      		{% else %}
+        		Demi journée
+      		{% endif %}
+    	</p>
+    	<p>Total : {{ reservation.prixTotal }} € </p>
+    </div>
+    
+    
+  {% for visitor in reservation.visitors %}
+    <div>
+      <h3>Ticket N° {{ loop.index }}</h3>
+      <div>
+        <div><b>Nom :</b> {{ visitor.nom }}</div>
+        <div><b>Prénom :</b> {{ visitor.prenom }}</div>
+        <div><b>Date de naissance :</b> {{ visitor.dateNaissance|date("d/m/Y") }}</div>
+        <div><b>Tarif :</b> {{ visitor.prix }} €</div>
+      </div>
+      {% if visitor.reduit == true %}
+        <p>Tarif réduit : un justificatif vous sera demandé à l'entrée du musée</p>
+      {% endif %}
+    </div>
+  {% endfor %}
+  </div>
+ 
 
-{% endblock %}
-
-
+</body>

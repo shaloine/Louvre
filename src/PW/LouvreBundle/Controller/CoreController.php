@@ -16,9 +16,6 @@ class CoreController extends Controller
   {
 
     $reservation = new Reservation();
-
-    $Mailer = $this->container->get('pw_louvre.mailerService');
-    $Mailer->send($reservation);
  
     $form   = $this->createForm(ReservationType::class, $reservation);
 
