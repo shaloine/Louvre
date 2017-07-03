@@ -9,4 +9,9 @@ services:
           - "@pw_louvre.ageCalculation"
     pw_louvre.checkoutValidation:
         class: PW\LouvreBundle\Services\PWCheckoutValidation
+    pw_louvre.mailerService:
+        class: PW\LouvreBundle\Services\PWMailerService
+        arguments:
+            - "@mailer"
+            - "@templating"
 

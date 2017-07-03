@@ -14,8 +14,12 @@ class CoreController extends Controller
 {
   public function indexAction(Request $request)
   {
+
     $reservation = new Reservation();
 
+    $Mailer = $this->container->get('pw_louvre.mailerService');
+    $Mailer->send($reservation);
+ 
     $form   = $this->createForm(ReservationType::class, $reservation);
 
     if ($request->isMethod('POST')) {
@@ -138,7 +142,6 @@ class CoreController extends Controller
   {
     $reservation = unserialize($this->get('session')->get('ObjReservation'));
 
-
     if (!$reservation){
       return $this->redirectToRoute('pw_louvre_home');
     }
@@ -168,6 +171,9 @@ class CoreController extends Controller
           ));
       }
 
+      $Mailer = $this->container->get('pw_louvre.mailerService');
+      $Mailer->send($reservation);
+
       $em = $this->getDoctrine()->getManager();
       $em->persist($reservation);
       $em->flush();
@@ -181,3 +187,4 @@ class CoreController extends Controller
   }
 
 }
+ 
