@@ -18,9 +18,9 @@ class PWMailerService
 	public function send($reservation)
 	{
 		$message = \Swift_Message::newInstance()
-        ->setSubject('sujet')
+        ->setSubject('Votre réservation musée du Louvre')
         ->setFrom('contact@louvre.com')
-        ->setTo('shaloine2@hotmail.com') //->setTo($reservation->getMail())
+        ->setTo($reservation->getMail())
         ->setBody(
         	$this->templating->render(
                 'PWLouvreBundle:Emails:confirmation.html.twig',
