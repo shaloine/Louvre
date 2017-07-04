@@ -3,45 +3,82 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <title>Le Louvre</title>
 
 </head>
 
-<body>
-	<div>
-		<img src="{{ absolute_url(asset('images/louvre_logo.png')) }}">
-		<h3 class="Title">Musée du Louvre</h3>
-	<div>
-
-	<div style="color: white; background-color: #1e90cb; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
-    	<h3>Votre réservation N°{{ reservation.code }}</h3>
-		<p> 
-			Date : {{ reservation.date|date("m/d/Y") }} - 
-      		{% if reservation.demi %}
-        		Journee entiere
-      		{% else %}
-        		Demi journée
-      		{% endif %}
-    	</p>
-    	<p style="margin-bottom: 0;">Total : {{ reservation.prixTotal }} € </p>
-    </div>
-    
-    
-  {% for visitor in reservation.visitors %}
-    <div style="background-color: #d9d9d9; padding: 10px;  padding-bottom: 1px; border-radius: 5px; margin-bottom: 10px;">
-      <h3 style="margin-top: 0;">Ticket N° {{ loop.index }}</h3>
-      <div>
-        <div><b>Nom :</b> {{ visitor.nom }} <b>Prénom :</b> {{ visitor.prenom }}</div>
-        <div><b>Date de naissance :</b> {{ visitor.dateNaissance|date("d/m/Y") }}</div>
-        <div><b>Tarif :</b> {{ visitor.prix }} €</div>
-      </div>
-      {% if visitor.reduit == true %}
-        <p>Tarif réduit : un justificatif vous sera demandé à l'entrée du musée</p>
-      {% endif %}
-    </div>
-  {% endfor %}
-  </div>
- 
-
+<body style="font-family: Arial">
+	<table style="width: 100%; background-color: rgb(42, 55, 78);" cellpadding="0" cellspacing="0" border="0">
+		<tr>
+			<td bgcolor="#2A374E" align="center">
+				<table cellpadding="0" cellspacing="0" border="0">
+					<tr><td width="640" height="30"></td></tr>
+					<tr>
+						<td width="640">
+							<table width="640" cellpadding="0" cellspacing="0" border="0" bgcolor="#f2f0f0">
+								<tr>
+									<td width="30"></td>
+									<td width="580" valign="middle" align="middle">
+										<img src="{{ absolute_url(asset('images/louvre_logo.png')) }}">
+									</td>
+									<td width="30"></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td width="640" height="1" bgcolor="#d7d6d6"></td>
+					</tr>
+					<tr>
+						<td width="640" bgcolor="#ffffff">
+							<table width="640" cellpadding="0" cellspacing="0" border="0" >
+								<tr>
+									<td width="30"></td>
+									<td width="580">
+										<table width="580" cellpadding="0" cellspacing="0" border="0">
+											<tr>
+												<td width="580">
+													<h3>Votre réservation N°{{ reservation.code }}</h3>
+													<p> 
+														Date : {{ reservation.date|date("m/d/Y") }} - 
+      													{% if reservation.demi %}
+        													Journée entière
+      													{% else %}
+        													Demi journée
+      													{% endif %}
+    												</p>
+    												<p>Total : {{ reservation.prixTotal }} € </p>
+												</td>
+											</tr>
+											{% for visitor in reservation.visitors %}
+											<tr>
+												<td width="580" height="1" bgcolor="#c7c5c5">
+												</td>
+											</tr>
+											<tr>
+												<td width="580">
+													<h3>Ticket N° {{ loop.index }}</h3>
+													<div>
+        												<p><b>Nom :</b> {{ visitor.nom }}</p>
+        												<p><b>Prénom :</b> {{ visitor.prenom }}</p>
+        												<p><b>Date de naissance :</b> {{ visitor.dateNaissance|date("d/m/Y") }}</p>
+        												<p><b>Tarif :</b> {{ visitor.prix }} €</p>
+      													{% if visitor.reduit == true %}
+       														<p>Tarif réduit : un justificatif vous sera demandé à l'entrée du musée</p>
+      													{% endif %}
+    												</div>
+												</td>
+											</tr>
+											{% endfor %}
+										</table>
+									</td>
+									<td width="30"></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
 </body>
